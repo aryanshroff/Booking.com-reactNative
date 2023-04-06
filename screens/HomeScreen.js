@@ -13,6 +13,7 @@ import HeaderComp from "../components/HeaderComp";
 import {
   BottomModal,
   ModalButton,
+  ModalContent,
   ModalFooter,
   ModalTitle,
   SlideAnimation,
@@ -61,7 +62,10 @@ const HomeScreen = () => {
               <Ionicons name="md-calendar-sharp" size={24} color="black" />
               <Text>Pick your date-range</Text>
             </Pressable>
-            <Pressable style={styles.pressable}>
+            <Pressable
+              style={styles.pressable}
+              onPress={() => setModalVisible(!modalVisible)}
+            >
               <Ionicons name="person-add" size={24} color="black" />
               <TextInput
                 placeholderTextColor="red"
@@ -115,10 +119,13 @@ const HomeScreen = () => {
           new SlideAnimation({
             slideFrom: "bottom",
           })
-          
         }
-        onHardwareBackPress={()=>setModalVisible(!modalVisible)}
-      ></BottomModal>
+        onHardwareBackPress={() => setModalVisible(!modalVisible)}
+        visible={modalVisible}
+        onTouchOutside={() => setModalVisible(!modalVisible)}
+      >
+        <ModalContent style={{ width: "100%", height: 310 }}></ModalContent>
+      </BottomModal>
     </>
   );
 };
